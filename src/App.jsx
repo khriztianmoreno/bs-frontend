@@ -1,9 +1,12 @@
 import styled from '@emotion/styled'
 import { Global, css } from '@emotion/react'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 import Navbar from './components/atoms/Navbar'
 import Users from './components/organisms/Users'
 import Tasks from './components/organisms/Tasks'
+
+const queryClient = new QueryClient()
 
 const globalStyles = css`
   * {
@@ -29,7 +32,7 @@ const RightTodo = styled.section`
 
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Global styles={globalStyles} />
       <Navbar />
       <ContainerTodo>
@@ -40,7 +43,7 @@ function App() {
           <Tasks />
         </RightTodo>
       </ContainerTodo>
-    </>
+    </QueryClientProvider>
   )
 }
 

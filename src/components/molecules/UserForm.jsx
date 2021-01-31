@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import styled from '@emotion/styled'
 
 import InputText from '../atoms/InputText'
 import Button from '../atoms/Button'
 
-const Container = styled.div`
-  padding-top: 10px;
-`
+import { useAppDispatch } from '../../context'
+import { createUser, getUsers } from '../../context/servcies'
 
 const UserForm = () => {
+  const dispatch = useAppDispatch()
+  // const { userSelected, tasks = [] } = useAppState()
+  const [showForm, setShowForm] = useState(false)
   const [user, saveUser] = useState({
     name: '',
   })
@@ -17,29 +18,37 @@ const UserForm = () => {
 
   const onChangeUser = e => {
     saveUser({
-      ...user,
-      [e.target.name]: e.target.value,
+      name: e.target.value,
     })
   }
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault()
-    if (name === '') {
-      alert('The name is required')
-    }
-
-    saveUser({
-      name: '',
-    })
+    await createUser(dispatch, user)
+    setShowForm(false)
+    saveUser({ name: '' })
+    getUsers(dispatch)
   }
+
   return (
-    <Container>
-      <Button type="button">New User</Button>
-      <form onSubmit={onSubmit}>
-        <InputText name={name} handleChange={onChangeUser} />
-        <Button type="submit">Add user</Button>
-      </form>
-    </Container>
+    <div>
+      {!showForm && (
+        <Button
+          type="button"
+          onClick={() => {
+            setShowForm(true)
+          }}
+        >
+          New User
+        </Button>
+      )}
+      {showForm && (
+        <form onSubmit={onSubmit}>
+          <InputText name={name} handleChange={onChangeUser} />
+          <Button type="submit">Add user</Button>
+        </form>
+      )}
+    </div>
   )
 }
 

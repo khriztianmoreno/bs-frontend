@@ -16,6 +16,13 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'arrow-parens': 0,
+    'implicit-arrow-linebreak': 0,
+    'no-underscore-dangle': [
+      2,
+      {
+        allow: ['_id'],
+      },
+    ],
     semi: 0,
     'comma-dangle': [
       'error',
@@ -35,19 +42,6 @@ module.exports = {
       },
     ],
     'import/extensions': 0,
-    'object-curly-newline': [
-      'error',
-      {
-        ObjectExpression: 'always',
-        ObjectPattern: {
-          multiline: true,
-        },
-        ImportDeclaration: 'never',
-        ExportDeclaration: {
-          multiline: true,
-          minProperties: 3,
-        },
-      },
-    ],
+    'object-curly-newline': 'off',
   },
 }

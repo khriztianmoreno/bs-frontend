@@ -2,20 +2,23 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 
+import { useAppDispatch } from '../../context'
+import { deleteUser, getUsers } from '../../context/servcies'
+
 const Container = styled('div')(
   {
     display: 'flex',
-    justifyContent: 'center',
-    margin: '0 auto',
-    padding: '12px 0px',
+    justifyContent: 'space-between',
+    padding: '12px 10px',
     width: '100%',
   },
-  () => css`
-    border-bottom: solid 4px #e4825f;
+  ({ selected }) => css`
+    border-bottom: solid 4px ${selected ? '#e4825f' : '#dedede'};
     background: white;
+    text-transform: capitalize;
 
     &:hover {
-      background: white;
+      border-bottom: solid 4px rgb(35, 42, 66);
     }
   `
 )
@@ -23,19 +26,37 @@ const Container = styled('div')(
 const DetailButton = styled.div`
   cursor: pointer;
   margin-right: 10px;
+  height: 100%;
+  width: 100%;
 `
 
 const DeleteButton = styled.div`
   cursor: pointer;
+  font-size: 20px;
   margin-right: 10px;
+
+  &:hover {
+    color: red;
+  }
 `
 
 const User = props => {
-  const { user } = props
+  const { user, isSelected } = props
+  const dispatch = useAppDispatch()
+
+  const selectUser = () => {
+    dispatch({ type: 'USER_SELECTED', payload: { ...user } })
+  }
+
+  const removeUser = async () => {
+    await deleteUser(dispatch, user._id)
+    getUsers(dispatch)
+  }
+
   return (
-    <Container selected>
-      <DetailButton>{user.name}</DetailButton>
-      <DeleteButton>
+    <Container selected={isSelected}>
+      <DetailButton onClick={selectUser}>{user.name}</DetailButton>
+      <DeleteButton onClick={removeUser}>
         <i className="far fa-times-circle" />
       </DeleteButton>
     </Container>
@@ -44,8 +65,14 @@ const User = props => {
 
 User.propTypes = {
   user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
+  isSelected: PropTypes.bool,
+}
+
+User.defaultProps = {
+  isSelected: false,
 }
 
 export default User

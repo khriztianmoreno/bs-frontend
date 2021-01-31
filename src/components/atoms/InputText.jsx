@@ -2,13 +2,13 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 
 const Input = styled.input`
-  background: white;
+  background-color: white;
   border: solid 2px black;
   display: block;
   line-height: 30px;
   margin: 0 auto;
   padding: 0px 10px;
-  width: 90%;
+  width: 100%;
 `
 
 const InputText = props => {
@@ -21,6 +21,7 @@ const InputText = props => {
       value={name}
       onChange={handleChange}
       className="input"
+      required
     />
   )
 }

@@ -19,14 +19,23 @@ export const SubmitButton = styled.button`
 `
 
 const Button = props => {
-  const { children, type = 'submit' } = props
+  const { children, type = 'submit', onClick } = props
 
-  return <SubmitButton type={type}>{children}</SubmitButton>
+  return (
+    <SubmitButton type={type} onClick={onClick}>
+      {children}
+    </SubmitButton>
+  )
 }
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+}
+
+Button.defaultProps = {
+  onClick: () => {},
 }
 
 export default Button

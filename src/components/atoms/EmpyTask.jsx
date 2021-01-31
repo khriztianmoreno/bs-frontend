@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 const Container = styled.div`
   align-items: center;
   display: flex;
-  height: 80vh;
+  min-height: calc(100vh - 25vh);
   justify-content: center;
   width: 100%;
 `
