@@ -1,26 +1,21 @@
+const { tsNeverKeyword } = require('@babel/types')
+
 module.exports = {
   env: {
     browser: true,
     es2021: true,
   },
   extends: ['plugin:react/recommended', 'airbnb'],
-  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2020,
+    ecmaVersion: 12,
     sourceType: 'module',
   },
-  settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
-    },
-  },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['react'],
   rules: {
+    'arrow-parens': 0,
     semi: 0,
     'comma-dangle': [
       'error',
@@ -35,8 +30,24 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': [
       1,
-      { extensions: ['.js', '.jsx', 'ts', 'tsx'] },
+      {
+        extensions: ['.js', '.jsx', 'ts', 'tsx'],
+      },
     ],
     'import/extensions': 0,
+    'object-curly-newline': [
+      'error',
+      {
+        ObjectExpression: 'always',
+        ObjectPattern: {
+          multiline: true,
+        },
+        ImportDeclaration: 'never',
+        ExportDeclaration: {
+          multiline: true,
+          minProperties: 3,
+        },
+      },
+    ],
   },
 }

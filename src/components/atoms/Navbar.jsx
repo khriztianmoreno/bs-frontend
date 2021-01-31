@@ -4,7 +4,7 @@ import logo from '../../assets/img/logo.png'
 
 const Container = styled.nav`
   align-items: center;
-  background: rgb(35, 42, 66);
+  background-color: rgb(35, 42, 66);
   display: flex;
   height: 10vh;
   justify-content: center;
