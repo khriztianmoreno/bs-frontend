@@ -12,33 +12,33 @@ const Container = styled('div')(
     padding: '12px 10px',
     width: '100%',
   },
-  ({ selected }) => css`
-    border-bottom: solid 4px ${selected ? '#e4825f' : '#dedede'};
-    background: white;
+  ({ theme, selected }) => css`
+    background-color: ${theme.colors.white};
+    border-bottom: solid 4px ${selected ? theme.colors.mangoTango : theme.colors.alto};
     text-transform: capitalize;
 
     &:hover {
-      border-bottom: solid 4px rgb(35, 42, 66);
+      border-bottom: solid 4px ${theme.colors.ebonyClay};
     }
   `
 )
-
 const DetailButton = styled.div`
   cursor: pointer;
   margin-right: 10px;
   height: 100%;
   width: 100%;
 `
+const DeleteButton = styled('div')(
+  ({ theme }) => css`
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 10px;
 
-const DeleteButton = styled.div`
-  cursor: pointer;
-  font-size: 20px;
-  margin-right: 10px;
-
-  &:hover {
-    color: red;
-  }
-`
+    &:hover {
+      color: ${theme.colors.red};
+    }
+  `
+)
 
 const User = props => {
   const { user, isSelected } = props

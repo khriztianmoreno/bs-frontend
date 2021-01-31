@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 
 import Button from '../atoms/Button'
 import Input from '../atoms/InputText'
@@ -7,23 +8,27 @@ import Input from '../atoms/InputText'
 import { useAppState, useAppDispatch } from '../../context'
 import { createTask, getTasksByUser } from '../../context/servcies'
 
-const Container = styled.div`
-  background: #232a42;
-  display: flex;
-  height: 15vh;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 80px;
-`
+const Container = styled('div')(
+  ({ theme }) => css`
+    background-color: ${theme.colors.ebonyClay};
+    display: flex;
+    flex-direction: column;
+    height: 15vh;
+    justify-content: center;
+    padding: 0 80px;
+  `
+)
 const Form = styled.form`
-  display: flex;
   align-items: center;
+  display: flex;
 `
-const Message = styled.h3`
-  color: #ffffff;
-  font-weight: bold;
-  padding-bottom: 10px;
-`
+const Message = styled('h3')(
+  ({ theme }) => css`
+    color: ${theme.colors.white};
+    font-weight: bold;
+    padding-bottom: 10px;
+  `
+)
 const UserName = styled.span`
   text-transform: capitalize;
 `

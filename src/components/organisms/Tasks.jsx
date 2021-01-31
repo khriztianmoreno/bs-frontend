@@ -40,7 +40,7 @@ const Tasks = () => {
   return (
     <>
       {!userSelected._id && (
-        <EmptyTasks text={"Choose an user to view it's tasks"} />
+        <EmptyTasks text={"Choose an user to view it's tasks 💁🏻‍♀️"} />
       )}
 
       <div>

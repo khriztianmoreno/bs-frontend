@@ -1,4 +1,4 @@
-const BASE = 'https://immense-bayou-17865.herokuapp.com/api'
+const BASE = process.env.REACT_APP_API_SERVICE_URL
 
 async function fetchData(endpoint) {
   try {

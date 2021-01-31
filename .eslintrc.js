@@ -1,5 +1,3 @@
-const { tsNeverKeyword } = require('@babel/types')
-
 module.exports = {
   env: {
     browser: true,

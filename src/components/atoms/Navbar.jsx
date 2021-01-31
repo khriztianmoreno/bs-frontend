@@ -1,15 +1,18 @@
 import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 
 import logo from '../../assets/img/logo.png'
 
-const Container = styled.nav`
-  align-items: center;
-  background-color: rgb(35, 42, 66);
-  display: flex;
-  height: 10vh;
-  justify-content: center;
-  width: 100%;
-`
+const Container = styled('nav')(
+  ({ theme }) => css`
+    align-items: center;
+    background-color: ${theme.colors.ebonyClay};
+    display: flex;
+    height: 10vh;
+    justify-content: center;
+    width: 100%;
+  `
+)
 
 const Navbar = () => (
   <Container>

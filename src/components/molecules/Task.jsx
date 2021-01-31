@@ -1,18 +1,21 @@
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 
 import Button from '../atoms/Button'
 
 import { useAppState, useAppDispatch } from '../../context'
 import { updateTask, getTasksByUser, deleteTask } from '../../context/servcies'
 
-const Container = styled.div`
-  align-items: center;
-  border-bottom: solid 1px #a0a0a0;
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 5px;
-`
+const Container = styled('div')(
+  ({ theme }) => css`
+    align-items: center;
+    border-bottom: solid 1px ${theme.colors.silverChalice};
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 5px;
+  `
+)
 const TaskContainer = styled.div`
   display: flex;
   width: 100%;

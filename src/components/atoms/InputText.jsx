@@ -1,21 +1,24 @@
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 
-const Input = styled.input`
-  background-color: white;
-  border: solid 2px black;
-  display: block;
-  line-height: 30px;
-  margin: 0 auto;
-  padding: 0px 10px;
-  width: 100%;
+const Input = styled('input')(
+  ({ theme }) => css`
+    background-color: ${theme.colors.white};
+    border: solid 2px ${theme.colors.black};
+    display: block;
+    line-height: 30px;
+    margin: 0 auto;
+    padding: 0px 10px;
+    width: 100%;
 
-  &:disabled {
-    cursor: not-allowed;
-    background-color: #c7c6c6;
-    color: #ffffff;
-  }
-`
+    &:disabled {
+      cursor: not-allowed;
+      background-color: ${theme.colors.silver};
+      color: ${theme.colors.white};
+    }
+  `
+)
 
 const InputText = props => {
   const {
