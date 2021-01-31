@@ -1,4 +1,4 @@
-const BASE = 'http://localhost:8080/api'
+const BASE = 'https://immense-bayou-17865.herokuapp.com/api'
 
 async function fetchData(endpoint) {
   try {
@@ -17,8 +17,7 @@ export async function getUsers(dispatch) {
     const data = await fetchData(`${BASE}/users/`)
     dispatch({ type: 'SET_USERS', payload: data })
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error)
+    dispatch({ type: 'ERROR', payload: error })
   } finally {
     dispatch({ type: 'SET_LOADING', payload: false })
   }
@@ -30,8 +29,7 @@ export async function getTasks(dispatch) {
     const data = await fetchData(`${BASE}/tasks/`)
     dispatch({ type: 'SET_TASKS', payload: { ...data } })
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error)
+    dispatch({ type: 'ERROR', payload: error })
   } finally {
     dispatch({ type: 'SET_LOADING', payload: false })
   }
@@ -43,8 +41,7 @@ export async function getTasksByUser(dispatch, userId) {
     const data = await fetchData(`${BASE}/tasks/user/${userId}`)
     dispatch({ type: 'SET_TASKS', payload: data })
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error)
+    dispatch({ type: 'ERROR', payload: error })
   } finally {
     dispatch({ type: 'SET_LOADING', payload: false })
   }
@@ -67,8 +64,7 @@ export async function createUser(dispatch, user) {
     dispatch({ type: 'USER_SELECTED', payload: { ...newUser } })
     // dispatch({ type: 'SET_TASKS', payload: { ...newUser } })
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error)
+    dispatch({ type: 'ERROR', payload: error })
   } finally {
     dispatch({ type: 'SET_LOADING', payload: false })
   }
@@ -88,8 +84,69 @@ export async function deleteUser(dispatch, userId) {
 
     dispatch({ type: 'USER_SELECTED', payload: { _id: undefined } })
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error)
+    dispatch({ type: 'ERROR', payload: error })
+  } finally {
+    dispatch({ type: 'SET_LOADING', payload: false })
+  }
+}
+
+export async function createTask(dispatch, task) {
+  dispatch({ type: 'SET_LOADING', payload: true })
+  try {
+    const payload = {
+      body: JSON.stringify(task),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
+    const data = await fetch(`${BASE}/tasks/`, payload)
+    const newTask = await data.json()
+
+    dispatch({ type: 'TASK_SELECTED', payload: { ...newTask } })
+  } catch (error) {
+    dispatch({ type: 'ERROR', payload: error })
+  } finally {
+    dispatch({ type: 'SET_LOADING', payload: false })
+  }
+}
+
+export async function updateTask(dispatch, task) {
+  dispatch({ type: 'SET_LOADING', payload: true })
+  try {
+    const payload = {
+      body: JSON.stringify(task),
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
+    const data = await fetch(`${BASE}/tasks/${task._id}`, payload)
+    const updatedTask = await data.json()
+
+    dispatch({ type: 'TASK_SELECTED', payload: { ...updatedTask } })
+  } catch (error) {
+    dispatch({ type: 'ERROR', payload: error })
+  } finally {
+    dispatch({ type: 'SET_LOADING', payload: false })
+  }
+}
+
+export async function deleteTask(dispatch, taskId) {
+  dispatch({ type: 'SET_LOADING', payload: true })
+  try {
+    const payload = {
+      method: 'DELETE',
+    }
+
+    const data = await fetch(`${BASE}/tasks/${taskId}`, payload)
+    const updatedTask = await data.json()
+
+    dispatch({ type: 'TASK_SELECTED', payload: { ...updatedTask } })
+  } catch (error) {
+    dispatch({ type: 'ERROR', payload: error })
   } finally {
     dispatch({ type: 'SET_LOADING', payload: false })
   }

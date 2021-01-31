@@ -24,6 +24,14 @@ module.exports = {
       },
     ],
     semi: 0,
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.js', '.jsx', 'ts', 'tsx'],
+      },
+    ],
+    'react/jsx-one-expression-per-line': [2, { allow: 'literal' }],
     'comma-dangle': [
       'error',
       {
@@ -34,14 +42,5 @@ module.exports = {
         functions: 'never',
       },
     ],
-    'react/react-in-jsx-scope': 'off',
-    'react/jsx-filename-extension': [
-      1,
-      {
-        extensions: ['.js', '.jsx', 'ts', 'tsx'],
-      },
-    ],
-    'import/extensions': 0,
-    'object-curly-newline': 'off',
   },
 }

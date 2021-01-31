@@ -26,22 +26,29 @@ const Tasks = () => {
     }
   }, [userSelected])
 
+  if (userSelected._id && !tasks.length) {
+    return (
+      <>
+        <EmptyTasks
+          text={`${userSelected.name} has no tasks created yet 🤦🏼‍♂️`}
+        />
+        <TaskForm />
+      </>
+    )
+  }
+
   return (
     <>
-      {!userSelected._id && !tasks.length && (
+      {!userSelected._id && (
         <EmptyTasks text={"Choose an user to view it's tasks"} />
       )}
 
       <div>
-        {tasks.length ? (
+        {tasks.length && userSelected._id ? (
           <TaskContainer>
             <TodoList toDo={toDo} done={done} />
           </TaskContainer>
-        ) : (
-          <EmptyTasks
-            text={`${userSelected.name} has no tasks created yet 🤦🏼‍♂️`}
-          />
-        )}
+        ) : null}
         <TaskForm />
       </div>
     </>

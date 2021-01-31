@@ -29,7 +29,9 @@ const EmptyTasks = ({ text }) => (
           alt="Bunnt Studio"
         />
       </div>
-      <Message>{text}</Message>
+      <Message>
+        {text}
+      </Message>
     </BunnyContainer>
   </Container>
 )

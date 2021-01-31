@@ -8,8 +8,9 @@ const initialState = {
   users: [],
   tasks: [],
   userSelected: { _id: undefined },
-  taskSelected: null,
+  taskSelected: { _id: undefined },
   isLoading: true,
+  error: null,
 }
 
 function appReducer(state, action) {
@@ -18,6 +19,12 @@ function appReducer(state, action) {
       return {
         ...state,
         userSelected: action.payload,
+      }
+    }
+    case 'TASK_SELECTED': {
+      return {
+        ...state,
+        taskSelected: action.payload,
       }
     }
     case 'SET_USERS': {
@@ -36,6 +43,12 @@ function appReducer(state, action) {
       return {
         ...state,
         isLoading: action.payload,
+      }
+    }
+    case 'ERROR': {
+      return {
+        ...state,
+        error: action.payload,
       }
     }
     default: {

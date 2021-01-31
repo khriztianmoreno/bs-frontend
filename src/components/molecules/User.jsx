@@ -55,7 +55,9 @@ const User = props => {
 
   return (
     <Container selected={isSelected}>
-      <DetailButton onClick={selectUser}>{user.name}</DetailButton>
+      <DetailButton onClick={selectUser}>
+        {user.name}
+      </DetailButton>
       <DeleteButton onClick={removeUser}>
         <i className="far fa-times-circle" />
       </DeleteButton>

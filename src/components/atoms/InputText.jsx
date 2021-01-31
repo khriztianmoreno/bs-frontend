@@ -9,26 +9,48 @@ const Input = styled.input`
   margin: 0 auto;
   padding: 0px 10px;
   width: 100%;
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #c7c6c6;
+    color: #ffffff;
+  }
 `
 
 const InputText = props => {
-  const { name, handleChange } = props
+  const {
+    handleChange,
+    disabled,
+    name,
+    placeholder,
+    value,
+  } = props
+
   return (
     <Input
-      type="text"
-      placeholder="User name"
-      name="name"
-      value={name}
+      name={name}
       onChange={handleChange}
-      className="input"
+      placeholder={placeholder}
+      type="text"
+      value={value}
+      disabled={disabled}
       required
     />
   )
 }
 
 InputText.propTypes = {
-  name: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
   handleChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+}
+
+InputText.defaultProps = {
+  disabled: false,
+  placeholder: 'User name',
+  value: '',
 }
 
 export default InputText

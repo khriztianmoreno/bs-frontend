@@ -10,7 +10,7 @@ import { getUsers } from '../../context/servcies'
 
 const Container = styled.div`
   background: #f1f1f1;
-  height: 45vh;
+  height: 50vh;
   overflow-y: auto;
 `
 
@@ -22,11 +22,6 @@ const Users = () => {
     if (!isEqual(users)) {
       getUsers(dispatch)
     }
-    console.log(
-      '🚀 ~ file: Users.jsx ~ line 23 ~ useEffect ~ isEqual(users))',
-      isEqual(users),
-      users
-    )
   }, [])
 
   return (
