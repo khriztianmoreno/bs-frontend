@@ -30,3 +30,8 @@ $ cp env.example .env
 3. Update `.env` with the required info. *The url of the backend server.*
 
 4. Run `npm start` to start the development server.
+
+### To Do
+
+- [ ] Responsive design
+- [ ] Update user name
